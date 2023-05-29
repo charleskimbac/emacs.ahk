@@ -545,17 +545,12 @@ Else
     Return
 
 ;; maximize and restore window
-F11::
-If is_target()
-    Send {F11}
+#f::
+WinGetActiveStats, Title, Width, Height, X, Y
+If  x < -5
+    WinRestore,A
 Else
-{
-    WinGetActiveStats, Title, Width, Height, X, Y
-    If  x < -5
-        WinRestore,A
-    Else
-        WinMaximize,A
-}
+    WinMaximize,A
 Return
 
 
