@@ -186,7 +186,7 @@ find_file()
 }
 save_buffer()
 {
-    Send, ^s
+    Send ^s
     global is_pre_x := 0
     Return
 }
@@ -299,13 +299,15 @@ mark_whole_buffer()
 
 
 ^x::
-If is_target()
+{
+if is_target()
     Send %A_ThisHotkey%
-Else
+else
     is_pre_x := 1
-Return
-
+return
+}
 ^f::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
@@ -316,22 +318,26 @@ Else
         forward_char()
 }
 Return
-
+}
 !f::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
     forward_word()
 Return
-
+}
 !b::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
     backward_word()
 Return
+}
 
 ^c::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
@@ -342,8 +348,9 @@ Else
         is_pre_c := 1
 }
 Return
-
+}
 ^d::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else If is_smatraPDF()
@@ -354,70 +361,91 @@ Else If is_smatraPDF()
 Else
     delete_char()
 Return
+}
 !d::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
     delete_word()
 Return
 
+}
 ^h::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
     delete_backward_char()
 Return
+}
 ^k::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
     kill_line()
 Return
+}
 ^o::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
     open_line_emacs()
 Return
+}
 ^g::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
     quit()
 Return
+}
 ^l::
+{
 If (is_target() || is_smatraPDF())
     Send %A_ThisHotkey%
 Else
     newline_emacs()
 Return
-
+}
 ^j::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
     newline_and_indent()
 Return
+}
 ^m::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
     newline()
 Return
+}
 ^i::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
     indent_for_tab_command_invert()
 Return
 
+}
 !i::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
     indent_for_tab_command()
 Return
+}
 ^s::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
@@ -428,46 +456,59 @@ Else
         isearch_forward()
 }
 Return
+}
 ^r::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
     isearch_backward()
 Return
+}
 ^w::
+{
 If (is_target() || is_smatraPDF())
     Send %A_ThisHotkey%
 Else
     kill_region()
 Return
+}
 !w::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
     kill_ring_save()
 Return
+}
 ^y::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
     yank()
 Return
+}
 ^/::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
     undo()
 Return
-
+}
 ^+/::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
     redo()
 Return
+}
 ;$^{Space}::
 ;^vk20sc039::
 ^vk20::
+{
 If is_target()
     Send {CtrlDown}{Space}{CtrlUp}
 Else
@@ -478,7 +519,9 @@ Else
         is_pre_spc := 1
 }
 Return
+}
 !h::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
@@ -489,74 +532,93 @@ Else
         is_pre_spc := 1
 }
 Return
+}
 ^a::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
     move_beginning_of_line()
 Return
+}
 ^e::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
     move_end_of_line()
 Return
+}
 ^p::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
     previous_line()
 Return
+}
 ^n::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
     next_line()
 Return
+}
 ^b::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
     backward_char()
 Return
+}
 ^v::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
     scroll_down()
 Return
+}
 !v::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
     scroll_up()
 Return
+}
 ;;text scale increase
 #=::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
     Send ^{WheelUp}
-    Return
+Return
+}
 ;;text scale decrease
 #-::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
     Send ^{WheelDown}
-    Return
-
+Return
+}
 ;; maximize and restore window
 #f::
+{
 WinGetActiveStats, Title, Width, Height, X, Y
 If  x < -5
     WinRestore,A
 Else
     WinMaximize,A
 Return
-
-
+}
 h::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
@@ -570,8 +632,9 @@ Else
         Send %A_ThisHotkey%
 }
 Return
-
+}
 d::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
@@ -586,24 +649,29 @@ Else
         Send %A_ThisHotkey%
 }
 Return
-
+}
 ;; For Visual Studio
 ;; 转到文档 M-.
 !.::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
     Send {F12}
 Return
+}
 ;; 返回上一个位置 M-,
 !,::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
     Send ^{-}
 Return
+}
 ;; 切换行注释 C-x,C-;
 ^;::
+{
 If is_target()
     Send %A_ThisHotkey%
 Else
@@ -620,4 +688,4 @@ Else
         Send %A_ThisHotkey%
 }
 Return
-
+}
