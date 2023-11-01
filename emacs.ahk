@@ -612,9 +612,9 @@ Return
 {
 WinGetPos &X, &Y,,, "A"
 If  x < -5
-    WinRestore(A)
+    WinRestore("A")
 Else
-    WinMaximize(A)
+    WinMaximize("A")
 Return
 }
 h::
