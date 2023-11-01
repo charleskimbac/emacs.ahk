@@ -541,7 +541,7 @@ else
 #f::
 {
 WinGetPos &X, &Y,,, "A"
-if  x < -5
+if  X < -5
     WinRestore("A")
 else
     WinMaximize("A")
