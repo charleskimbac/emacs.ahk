@@ -174,8 +174,8 @@ This tiny script allows you to use the emacs-like key bindings on Windows, which
 </table>
 
 * Customized by Eason Huang
-# Toggle Input Method by Capslock Key
-use Capslock key for input method switch, and hold the Capslock key for switching Capslocks
+## Toggle Input Method by Shift Key
+use Shift key for input method switch
 
-# Other useful functions
-windows.ahk include some useful fictions for handling windows system more efficient.
+## Update to AutoHotkey V2
+Now this script only works for V2, tested on v2.0.10
