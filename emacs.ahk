@@ -19,31 +19,33 @@ is_pre_c := 0
 ; (Please comment out applications you don't use)
 is_target()
 {
-IfWinActive,ahk_class ConsoleWindowClass ; Cygwin
+if WinActive("ahk_class ConsoleWindowClass") ; Cygwin
     Return 1
-IfWinActive,ahk_exe Code.exe ;vscode
-    Return 1   
-IfWinActive,ahk_class VMwareUnityHostWndClass ; Avoid VMwareUnity with AutoHotkey
+if WinActive("ahk_exe Code.exe") ;vscode
     Return 1
-IfWinActive,ahk_class mintty
+if WinActive("ahk_class VMwareUnityHostWndClass") ; Avoid VMwareUnity with AutoHotkey
     Return 1
-IfWinActive,ahk_class Window Class
+if WinActive("ahk_class mintty")
     Return 1
-IfWinActive,ahk_class CASCADIA_HOSTING_WINDOW_CLASS ;Windows 10 terminal
+if WinActive("ahk_class Window Class")
     Return 1
-IfWinActive,ahk_class Vim ; GVI
+if WinActive("ahk_class CASCADIA_HOSTING_WINDOW_CLASS") ;Windows 10 terminal
     Return 1
-IfWinActive,ahk_class Emacs ; NTEmacs
+if WinActive("ahk_class Vim") ; GVI
     Return 1
-IfWinActive,ahk_class X410_XAppWin
+if WinActive("ahk_class Emacs") ; NTEmacs
+    Return 1
+if WinActive("ahk_class X410_XAppWin")
+    Return 1
+if WinActive("ahk_class RAIL_WINDOW")
     Return 1
 Return 0
 }
 
 is_smatraPDF()
 {
-    IfWinActive,ahk_class SUMATRA_PDF_FRAME ; smatraPDF
-        Return 1
+if WinActive("ahk_class SUMATRA_PDF_FRAME") ; smatraPDF
+    Return 1
 Return 0
 }
 
