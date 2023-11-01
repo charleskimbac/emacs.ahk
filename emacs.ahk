@@ -9,11 +9,11 @@ InstallKeybdHook
 SetKeyDelay 0
 
 ; turns to be 1 when ctrl-x is pressed
-is_pre_x := 0
+global IS_PRE_X := 0
 ; turns to be 1 when ctrl-space is pressed
-is_pre_spc := 0
+global IS_PRE_SPC := 0
 ; turns to be 1 when Ctrl-c is pressed
-is_pre_c := 0
+global IS_PRE_C := 0
 
 ; Applications you want to disable emacs-like keybindings
 ; (Please comment out applications you don't use)
@@ -52,21 +52,21 @@ Return 0
 delete_char()
 {
     Send "{Del}"
-    global is_pre_spc := 0
+    global IS_PRE_SPC := 0
     Return
 }
 
 delete_word()
 {
     Send "^{Del}"
-    global is_pre_spc := 0
+    global IS_PRE_SPC := 0
     Return
 }
 
 delete_backward_char()
 {
     Send "{BS}"
-    global is_pre_spc := 0
+    global IS_PRE_SPC := 0
     Return
 }
 kill_line()
@@ -74,133 +74,133 @@ kill_line()
     Send "{ShiftDown}{END}{SHIFTUP}"
     Sleep 50 ;[ms] this value depends on your environment
     Send "^x"
-    global is_pre_spc := 0
+    global IS_PRE_SPC := 0
     Return
 }
 open_line()
 {
     Send "{END}{Enter}{Up}"
-    global is_pre_spc := 0
+    global IS_PRE_SPC := 0
     Return
 }
 
 open_line_emacs()
 {
     Send "{Home}{Enter}{Up}"
-    global is_pre_spc := 0
+    global IS_PRE_SPC := 0
     Return
 }
 quit()
 {
     Send "{ESC}"
-    global is_pre_spc := 0
+    global IS_PRE_SPC := 0
     Return
 }
 newline()
 {
     Send "{Enter}"
-    global is_pre_spc := 0
+    global IS_PRE_SPC := 0
     Return
 }
 
 duplicate_line()
 {
     Send "^d"
-    global is_pre_spc := 0
+    global IS_PRE_SPC := 0
     Return
 }
 
 newline_emacs()
 {
     Send "{END}{Enter}"
-    global is_pre_spc := 0
+    global IS_PRE_SPC := 0
     Return
 }
 indent_for_tab_command()
 {
     Send "{Tab}"
-    global is_pre_spc := 0
+    global IS_PRE_SPC := 0
     Return
 }
 
 indent_for_tab_command_invert()
 {
     Send "+{Tab}"
-    global is_pre_spc := 0
+    global IS_PRE_SPC := 0
     Return
 }
 newline_and_indent()
 {
     Send "{Enter}{Tab}"
-    global is_pre_spc := 0
+    global IS_PRE_SPC := 0
     Return
 }
 isearch_forward()
 {
     Send "^f"
-    global is_pre_spc := 0
+    global IS_PRE_SPC := 0
     Return
 }
 isearch_backward()
 {
     Send "^f"
-    global is_pre_spc := 0
+    global IS_PRE_SPC := 0
     Return
 }
 kill_region()
 {
     Send "^x"
-    global is_pre_spc := 0
+    global IS_PRE_SPC := 0
     Return
 }
 kill_ring_save()
 {
     Send "^c"
-    global is_pre_spc := 0
+    global IS_PRE_SPC := 0
     Return
 }
 yank()
 {
     Send "^v"
-    global is_pre_spc := 0
+    global IS_PRE_SPC := 0
     Return
 }
 undo()
 {
     Send "^z"
-    global is_pre_spc := 0
+    global IS_PRE_SPC := 0
     Return
 }
 
 redo()
 {
     Send "^y"
-    global is_pre_spc := 0
+    global IS_PRE_SPC := 0
     Return
 }
 find_file()
 {
     Send "^o"
-    global is_pre_x := 0
+    global IS_PRE_X := 0
     Return
 }
 save_buffer()
 {
     Send "^s"
-    global is_pre_x := 0
+    global IS_PRE_X := 0
     Return
 }
 kill_emacs()
 {
     Send "!{F4}"
-    global is_pre_x := 0
+    global IS_PRE_X := 0
     Return
 }
 
 move_beginning_of_line()
 {
     global
-    if is_pre_spc
+    if IS_PRE_SPC
         Send "+{HOME}"
     Else
         Send "{HOME}"
@@ -209,7 +209,7 @@ move_beginning_of_line()
 move_end_of_line()
 {
     global
-    if is_pre_spc
+    if IS_PRE_SPC
         Send "+{END}"
     Else
         Send "{END}"
@@ -218,7 +218,7 @@ move_end_of_line()
 previous_line()
 {
     global
-    if is_pre_spc
+    if IS_PRE_SPC
         Send "+{Up}"
     Else
         Send "{Up}"
@@ -227,7 +227,7 @@ previous_line()
 next_line()
 {
     global
-    if is_pre_spc
+    if IS_PRE_SPC
         Send "+{Down}"
     Else
         Send "{Down}"
@@ -236,7 +236,7 @@ next_line()
 forward_char()
 {
     global
-    if is_pre_spc
+    if IS_PRE_SPC
         Send "+{Right}"
     Else
         Send "{Right}"
@@ -245,7 +245,7 @@ forward_char()
 backward_char()
 {
     global
-    if is_pre_spc
+    if IS_PRE_SPC
         Send "+{Left}"
     Else
         Send "{Left}"
@@ -255,7 +255,7 @@ backward_char()
 forward_word()
 {
     global
-    if is_pre_spc
+    if IS_PRE_SPC
         Send "^+{Right}"
     Else
         Send "^{Right}"
@@ -265,7 +265,7 @@ forward_word()
 backward_word()
 {
     global
-    if is_pre_spc
+    if IS_PRE_SPC
         Send "^+{Left}"
     Else
         Send "^{Left}"
@@ -275,7 +275,7 @@ backward_word()
 scroll_up()
 {
     global
-    if is_pre_spc
+    if IS_PRE_SPC
         Send "+{PgUp}"
     Else
         Send "{PgUp}"
@@ -284,7 +284,7 @@ scroll_up()
 scroll_down()
 {
     global
-    if is_pre_spc
+    if IS_PRE_SPC
         Send "+{PgDn}"
     Else
         Send "{PgDn}"
@@ -294,7 +294,7 @@ scroll_down()
 mark_whole_buffer()
 {
     Send "^{End}^+{Home}"
-    global is_pre_spc := 0
+    global IS_PRE_SPC := 0
 }
 
 
@@ -303,7 +303,7 @@ mark_whole_buffer()
 if is_target()
     Send(A_ThisHotkey)
 else
-    is_pre_x := 1
+    global IS_PRE_X := 1
 return
 }
 ^f::
@@ -312,7 +312,7 @@ If is_target()
     Send(A_ThisHotkey)
 Else
 {
-    If is_pre_x
+    If IS_PRE_X
         find_file()
     Else
         forward_char()
@@ -342,10 +342,10 @@ If is_target()
     Send(A_ThisHotkey)
 Else
 {
-    If is_pre_x
+    If IS_PRE_X
         kill_emacs()
     Else
-        is_pre_c := 1
+        global IS_PRE_C := 1
 }
 Return
 }
@@ -450,7 +450,7 @@ If is_target()
     Send(A_ThisHotkey)
 Else
 {
-    If is_pre_x
+    If IS_PRE_X
         save_buffer()
     Else
         isearch_forward()
@@ -513,10 +513,10 @@ If is_target()
     Send "{CtrlDown}{Space}{CtrlUp}"
 Else
 {
-    If is_pre_spc
-        is_pre_spc := 0
+    If IS_PRE_SPC
+       global IS_PRE_SPC := 0
     Else
-        is_pre_spc := 1
+       global IS_PRE_SPC := 1
 }
 Return
 }
@@ -526,10 +526,10 @@ If is_target()
     Send(A_ThisHotkey)
 Else
 {
-    If is_pre_spc
-        is_pre_spc := 0
+    If IS_PRE_SPC
+        global IS_PRE_SPC := 0
     Else
-        is_pre_spc := 1
+        global IS_PRE_SPC := 1
 }
 Return
 }
@@ -623,10 +623,10 @@ If is_target()
     Send(A_ThisHotkey)
 Else
 {
-    If is_pre_x
+    If IS_PRE_X
     {
         mark_whole_buffer()
-        global is_pre_x := 0
+        global IS_PRE_X := 0
     }
     Else
         Send(A_ThisHotkey)
@@ -639,11 +639,11 @@ If is_target()
     Send(A_ThisHotkey)
 Else
 {
-    If is_pre_c
+    If IS_PRE_C
     {
         duplicate_line()
         next_line()
-        global is_pre_c := 0
+        global IS_PRE_C := 0
     }
     Else
         Send(A_ThisHotkey)
@@ -676,13 +676,13 @@ If is_target()
     Send(A_ThisHotkey)
 Else
 {
-    If is_pre_x
+    If IS_PRE_X
     {
         Send "^{k}"
         Sleep 50
         Send "^{/}"
         next_line()
-        global is_pre_x := 0
+        global IS_PRE_X := 0
     }
     Else
         Send(A_ThisHotkey)
