@@ -171,6 +171,14 @@ This tiny script allows you to use the emacs-like key bindings on Windows, which
 <td>C-x, h</td>
 <td>mark-whole-buffer</td>
 </tr>
+<tr>
+<td>C-c, d</td>
+<td>duplicate of current line</td>
+</tr>
+<tr>
+<td>C-x, C-;</td>
+<td>toggle the comment of line</td>
+</tr>
 </table>
 
 * Customized by Eason Huang
