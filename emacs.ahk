@@ -620,7 +620,7 @@ Return
 h::
 {
 If is_target()
-    Send A_ThisHotkey
+    Send(A_ThisHotkey)
 Else
 {
     If is_pre_x
@@ -629,14 +629,14 @@ Else
         global is_pre_x := 0
     }
     Else
-        Send A_ThisHotkey
+        Send(A_ThisHotkey)
 }
 Return
 }
 d::
 {
 If is_target()
-    Send A_ThisHotkey
+    Send(A_ThisHotkey)
 Else
 {
     If is_pre_c
@@ -646,7 +646,7 @@ Else
         global is_pre_c := 0
     }
     Else
-        Send A_ThisHotkey
+        Send(A_ThisHotkey)
 }
 Return
 }
@@ -655,7 +655,7 @@ Return
 !.::
 {
 If is_target()
-    Send A_ThisHotkey
+    Send(A_ThisHotkey)
 Else
     Send "{F12}"
 Return
@@ -664,7 +664,7 @@ Return
 !,::
 {
 If is_target()
-    Send A_ThisHotkey
+    Send(A_ThisHotkey)
 Else
     Send "^{-}"
 Return
@@ -673,7 +673,7 @@ Return
 ^;::
 {
 If is_target()
-    Send A_ThisHotkey
+    Send(A_ThisHotkey)
 Else
 {
     If is_pre_x
@@ -685,7 +685,7 @@ Else
         global is_pre_x := 0
     }
     Else
-        Send A_ThisHotkey
+        Send(A_ThisHotkey)
 }
 Return
 }
