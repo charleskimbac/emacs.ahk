@@ -201,7 +201,7 @@ move_beginning_of_line()
     global
     if IS_PRE_SPC
         Send "+{HOME}"
-    Else
+    else
         Send "{HOME}"
         return
 }
@@ -210,7 +210,7 @@ move_end_of_line()
     global
     if IS_PRE_SPC
         Send "+{END}"
-    Else
+    else
         Send "{END}"
         return
 }
@@ -219,7 +219,7 @@ previous_line()
     global
     if IS_PRE_SPC
         Send "+{Up}"
-    Else
+    else
         Send "{Up}"
         return
 }
@@ -228,7 +228,7 @@ next_line()
     global
     if IS_PRE_SPC
         Send "+{Down}"
-    Else
+    else
         Send "{Down}"
         return
 }
@@ -237,7 +237,7 @@ forward_char()
     global
     if IS_PRE_SPC
         Send "+{Right}"
-    Else
+    else
         Send "{Right}"
         return
 }
@@ -246,7 +246,7 @@ backward_char()
     global
     if IS_PRE_SPC
         Send "+{Left}"
-    Else
+    else
         Send "{Left}"
         return
 }
@@ -256,7 +256,7 @@ forward_word()
     global
     if IS_PRE_SPC
         Send "^+{Right}"
-    Else
+    else
         Send "^{Right}"
         return
 }
@@ -266,7 +266,7 @@ backward_word()
     global
     if IS_PRE_SPC
         Send "^+{Left}"
-    Else
+    else
         Send "^{Left}"
         return
 }
@@ -276,7 +276,7 @@ scroll_up()
     global
     if IS_PRE_SPC
         Send "+{PgUp}"
-    Else
+    else
         Send "{PgUp}"
         return
 }
@@ -285,7 +285,7 @@ scroll_down()
     global
     if IS_PRE_SPC
         Send "+{PgDn}"
-    Else
+    else
         Send "{PgDn}"
         return
 }
@@ -307,200 +307,200 @@ return
 }
 ^f::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
 {
-    If IS_PRE_X
+    if IS_PRE_X
         find_file()
-    Else
+    else
         forward_char()
 }
 return
 }
 !f::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
     forward_word()
 return
 }
 !b::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
     backward_word()
 return
 }
 
 ^c::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
 {
-    If IS_PRE_X
+    if IS_PRE_X
         kill_emacs()
-    Else
+    else
         global IS_PRE_C := 1
 }
 return
 }
 ^d::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else If is_smatraPDF()
+else if is_smatraPDF()
 {
     Send "^b"
 }
 
-Else
+else
     delete_char()
 return
 }
 !d::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
     delete_word()
 return
 
 }
 ^h::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
     delete_backward_char()
 return
 }
 ^k::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
     kill_line()
 return
 }
 ^o::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
     open_line_emacs()
 return
 }
 ^g::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
     quit()
 return
 }
 ^l::
 {
-If (is_target() || is_smatraPDF())
+if (is_target() || is_smatraPDF())
     Send(A_ThisHotkey)
-Else
+else
     newline_emacs()
 return
 }
 ^j::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
     newline_and_indent()
 return
 }
 ^m::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
     newline()
 return
 }
 ^i::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
     indent_for_tab_command_invert()
 return
 
 }
 !i::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
     indent_for_tab_command()
 return
 }
 ^s::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
 {
-    If IS_PRE_X
+    if IS_PRE_X
         save_buffer()
-    Else
+    else
         isearch_forward()
 }
 return
 }
 ^r::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
     isearch_backward()
 return
 }
 ^w::
 {
-If (is_target() || is_smatraPDF())
+if (is_target() || is_smatraPDF())
     Send(A_ThisHotkey)
-Else
+else
     kill_region()
 return
 }
 !w::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
     kill_ring_save()
 return
 }
 ^y::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
     yank()
 return
 }
 ^/::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
     undo()
 return
 }
 ^+/::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
     redo()
 return
 }
@@ -508,101 +508,101 @@ return
 ;^vk20sc039::
 ^vk20::
 {
-If is_target()
+if is_target()
     Send "{CtrlDown}{Space}{CtrlUp}"
-Else
+else
 {
-    If IS_PRE_SPC
+    if IS_PRE_SPC
        global IS_PRE_SPC := 0
-    Else
+    else
        global IS_PRE_SPC := 1
 }
 return
 }
 !h::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
 {
-    If IS_PRE_SPC
+    if IS_PRE_SPC
         global IS_PRE_SPC := 0
-    Else
+    else
         global IS_PRE_SPC := 1
 }
 return
 }
 ^a::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
     move_beginning_of_line()
 return
 }
 ^e::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
     move_end_of_line()
 return
 }
 ^p::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
     previous_line()
 return
 }
 ^n::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
     next_line()
 return
 }
 ^b::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
     backward_char()
 return
 }
 ^v::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
     scroll_down()
 return
 }
 !v::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
     scroll_up()
 return
 }
 ;;text scale increase
 #=::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
     Send "^{WheelUp}"
 return
 }
 ;;text scale decrease
 #-::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
     Send "^{WheelDown}"
 return
 }
@@ -610,41 +610,41 @@ return
 #f::
 {
 WinGetPos &X, &Y,,, "A"
-If  x < -5
+if  x < -5
     WinRestore("A")
-Else
+else
     WinMaximize("A")
 return
 }
 h::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
 {
-    If IS_PRE_X
+    if IS_PRE_X
     {
         mark_whole_buffer()
         global IS_PRE_X := 0
     }
-    Else
+    else
         Send(A_ThisHotkey)
 }
 return
 }
 d::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
 {
-    If IS_PRE_C
+    if IS_PRE_C
     {
         duplicate_line()
         next_line()
         global IS_PRE_C := 0
     }
-    Else
+    else
         Send(A_ThisHotkey)
 }
 return
@@ -653,29 +653,29 @@ return
 ;; 转到文档 M-.
 !.::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
     Send "{F12}"
 return
 }
 ;; 返回上一个位置 M-,
 !,::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
     Send "^{-}"
 return
 }
 ;; 切换行注释 C-x,C-;
 ^;::
 {
-If is_target()
+if is_target()
     Send(A_ThisHotkey)
-Else
+else
 {
-    If IS_PRE_X
+    if IS_PRE_X
     {
         Send "^{k}"
         Sleep 50
@@ -683,7 +683,7 @@ Else
         next_line()
         global IS_PRE_X := 0
     }
-    Else
+    else
         Send(A_ThisHotkey)
 }
 return
