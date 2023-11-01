@@ -51,148 +51,148 @@ Return 0
 
 delete_char()
 {
-    Send {Del}
+    Send "{Del}"
     global is_pre_spc := 0
     Return
 }
 
 delete_word()
 {
-    Send ^{Del}
+    Send "^{Del}"
     global is_pre_spc := 0
     Return
 }
 
 delete_backward_char()
 {
-    Send {BS}
+    Send "{BS}"
     global is_pre_spc := 0
     Return
 }
 kill_line()
 {
-    Send {ShiftDown}{END}{SHIFTUP}
+    Send "{ShiftDown}{END}{SHIFTUP}"
     Sleep 50 ;[ms] this value depends on your environment
-    Send ^x
+    Send "^x"
     global is_pre_spc := 0
     Return
 }
 open_line()
 {
-    Send {END}{Enter}{Up}
+    Send "{END}{Enter}{Up}"
     global is_pre_spc := 0
     Return
 }
 
 open_line_emacs()
 {
-    Send {Home}{Enter}{Up}
+    Send "{Home}{Enter}{Up}"
     global is_pre_spc := 0
     Return
 }
 quit()
 {
-    Send {ESC}
+    Send "{ESC}"
     global is_pre_spc := 0
     Return
 }
 newline()
 {
-    Send {Enter}
+    Send "{Enter}"
     global is_pre_spc := 0
     Return
 }
 
 duplicate_line()
 {
-    Send ^d
+    Send "^d"
     global is_pre_spc := 0
     Return
 }
 
 newline_emacs()
 {
-    Send {END}{Enter}
+    Send "{END}{Enter}"
     global is_pre_spc := 0
     Return
 }
 indent_for_tab_command()
 {
-    Send {Tab}
+    Send "{Tab}"
     global is_pre_spc := 0
     Return
 }
 
 indent_for_tab_command_invert()
 {
-    Send +{Tab}
+    Send "+{Tab}"
     global is_pre_spc := 0
     Return
 }
 newline_and_indent()
 {
-    Send {Enter}{Tab}
+    Send "{Enter}{Tab}"
     global is_pre_spc := 0
     Return
 }
 isearch_forward()
 {
-    Send ^f
+    Send "^f"
     global is_pre_spc := 0
     Return
 }
 isearch_backward()
 {
-    Send ^f
+    Send "^f"
     global is_pre_spc := 0
     Return
 }
 kill_region()
 {
-    Send ^x
+    Send "^x"
     global is_pre_spc := 0
     Return
 }
 kill_ring_save()
 {
-    Send ^c
+    Send "^c"
     global is_pre_spc := 0
     Return
 }
 yank()
 {
-    Send ^v
+    Send "^v"
     global is_pre_spc := 0
     Return
 }
 undo()
 {
-    Send ^z
+    Send "^z"
     global is_pre_spc := 0
     Return
 }
 
 redo()
 {
-    Send ^y
+    Send "^y"
     global is_pre_spc := 0
     Return
 }
 find_file()
 {
-    Send ^o
+    Send "^o"
     global is_pre_x := 0
     Return
 }
 save_buffer()
 {
-    Send ^s
+    Send "^s"
     global is_pre_x := 0
     Return
 }
 kill_emacs()
 {
-    Send !{F4}
+    Send "!{F4}"
     global is_pre_x := 0
     Return
 }
@@ -201,54 +201,54 @@ move_beginning_of_line()
 {
     global
     if is_pre_spc
-        Send +{HOME}
+        Send "+{HOME}"
     Else
-        Send {HOME}
+        Send "{HOME}"
         Return
 }
 move_end_of_line()
 {
     global
     if is_pre_spc
-        Send +{END}
+        Send "+{END}"
     Else
-        Send {END}
+        Send "{END}"
         Return
 }
 previous_line()
 {
     global
     if is_pre_spc
-        Send +{Up}
+        Send "+{Up}"
     Else
-        Send {Up}
+        Send "{Up}"
         Return
 }
 next_line()
 {
     global
     if is_pre_spc
-        Send +{Down}
+        Send "+{Down}"
     Else
-        Send {Down}
+        Send "{Down}"
         Return
 }
 forward_char()
 {
     global
     if is_pre_spc
-        Send +{Right}
+        Send "+{Right}"
     Else
-        Send {Right}
+        Send "{Right}"
         Return
 }
 backward_char()
 {
     global
     if is_pre_spc
-        Send +{Left}
+        Send "+{Left}"
     Else
-        Send {Left}
+        Send "{Left}"
         Return
 }
 
@@ -256,9 +256,9 @@ forward_word()
 {
     global
     if is_pre_spc
-        Send ^+{Right}
+        Send "^+{Right}"
     Else
-        Send ^{Right}
+        Send "^{Right}"
         Return
 }
 
@@ -266,9 +266,9 @@ backward_word()
 {
     global
     if is_pre_spc
-        Send ^+{Left}
+        Send "^+{Left}"
     Else
-        Send ^{Left}
+        Send "^{Left}"
         Return
 }
 
@@ -276,24 +276,24 @@ scroll_up()
 {
     global
     if is_pre_spc
-        Send +{PgUp}
+        Send "+{PgUp}"
     Else
-        Send {PgUp}
+        Send "{PgUp}"
         Return
 }
 scroll_down()
 {
     global
     if is_pre_spc
-        Send +{PgDn}
+        Send "+{PgDn}"
     Else
-        Send {PgDn}
+        Send "{PgDn}"
         Return
 }
 
 mark_whole_buffer()
 {
-    Send ^{End}^+{Home}
+    Send "^{End}^+{Home}"
     global is_pre_spc := 0
 }
 
@@ -301,7 +301,7 @@ mark_whole_buffer()
 ^x::
 {
 if is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 else
     is_pre_x := 1
 return
@@ -309,7 +309,7 @@ return
 ^f::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
 {
     If is_pre_x
@@ -322,7 +322,7 @@ Return
 !f::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
     forward_word()
 Return
@@ -330,7 +330,7 @@ Return
 !b::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
     backward_word()
 Return
@@ -339,7 +339,7 @@ Return
 ^c::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
 {
     If is_pre_x
@@ -352,10 +352,10 @@ Return
 ^d::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else If is_smatraPDF()
 {
-    Send ^b
+    Send "^b"
 }
 
 Else
@@ -365,7 +365,7 @@ Return
 !d::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
     delete_word()
 Return
@@ -374,7 +374,7 @@ Return
 ^h::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
     delete_backward_char()
 Return
@@ -382,7 +382,7 @@ Return
 ^k::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
     kill_line()
 Return
@@ -390,7 +390,7 @@ Return
 ^o::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
     open_line_emacs()
 Return
@@ -398,7 +398,7 @@ Return
 ^g::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
     quit()
 Return
@@ -406,7 +406,7 @@ Return
 ^l::
 {
 If (is_target() || is_smatraPDF())
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
     newline_emacs()
 Return
@@ -414,7 +414,7 @@ Return
 ^j::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
     newline_and_indent()
 Return
@@ -422,7 +422,7 @@ Return
 ^m::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
     newline()
 Return
@@ -430,7 +430,7 @@ Return
 ^i::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
     indent_for_tab_command_invert()
 Return
@@ -439,7 +439,7 @@ Return
 !i::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
     indent_for_tab_command()
 Return
@@ -447,7 +447,7 @@ Return
 ^s::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
 {
     If is_pre_x
@@ -460,7 +460,7 @@ Return
 ^r::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
     isearch_backward()
 Return
@@ -468,7 +468,7 @@ Return
 ^w::
 {
 If (is_target() || is_smatraPDF())
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
     kill_region()
 Return
@@ -476,7 +476,7 @@ Return
 !w::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
     kill_ring_save()
 Return
@@ -484,7 +484,7 @@ Return
 ^y::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
     yank()
 Return
@@ -492,7 +492,7 @@ Return
 ^/::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
     undo()
 Return
@@ -500,7 +500,7 @@ Return
 ^+/::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
     redo()
 Return
@@ -510,7 +510,7 @@ Return
 ^vk20::
 {
 If is_target()
-    Send {CtrlDown}{Space}{CtrlUp}
+    Send "{CtrlDown}{Space}{CtrlUp}"
 Else
 {
     If is_pre_spc
@@ -523,7 +523,7 @@ Return
 !h::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
 {
     If is_pre_spc
@@ -536,7 +536,7 @@ Return
 ^a::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
     move_beginning_of_line()
 Return
@@ -544,7 +544,7 @@ Return
 ^e::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
     move_end_of_line()
 Return
@@ -552,7 +552,7 @@ Return
 ^p::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
     previous_line()
 Return
@@ -560,7 +560,7 @@ Return
 ^n::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
     next_line()
 Return
@@ -568,7 +568,7 @@ Return
 ^b::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
     backward_char()
 Return
@@ -576,7 +576,7 @@ Return
 ^v::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
     scroll_down()
 Return
@@ -584,7 +584,7 @@ Return
 !v::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
     scroll_up()
 Return
@@ -593,18 +593,18 @@ Return
 #=::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
-    Send ^{WheelUp}
+    Send "^{WheelUp}"
 Return
 }
 ;;text scale decrease
 #-::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
-    Send ^{WheelDown}
+    Send "^{WheelDown}"
 Return
 }
 ;; maximize and restore window
@@ -620,7 +620,7 @@ Return
 h::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
 {
     If is_pre_x
@@ -629,14 +629,14 @@ Else
         global is_pre_x := 0
     }
     Else
-        Send %A_ThisHotkey%
+        Send "%A_ThisHotkey%"
 }
 Return
 }
 d::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
 {
     If is_pre_c
@@ -646,7 +646,7 @@ Else
         global is_pre_c := 0
     }
     Else
-        Send %A_ThisHotkey%
+        Send "%A_ThisHotkey%"
 }
 Return
 }
@@ -655,37 +655,37 @@ Return
 !.::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
-    Send {F12}
+    Send "{F12}"
 Return
 }
 ;; 返回上一个位置 M-,
 !,::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
-    Send ^{-}
+    Send "^{-}"
 Return
 }
 ;; 切换行注释 C-x,C-;
 ^;::
 {
 If is_target()
-    Send %A_ThisHotkey%
+    Send "%A_ThisHotkey%"
 Else
 {
     If is_pre_x
     {
-        Send ^{k}
+        Send "^{k}"
         Sleep 50
-        Send ^{/}
+        Send "^{/}"
         next_line()
         global is_pre_x := 0
     }
     Else
-        Send %A_ThisHotkey%
+        Send "%A_ThisHotkey%"
 }
 Return
 }
