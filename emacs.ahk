@@ -446,9 +446,12 @@ if is_target()
 else
     redo()
 }
-;$^{Space}::
-;^vk20sc039::
-^vk20::
+;; Set the mark with C-SPC in Emacs
+^Space::
+{
+if WinActive("ahk_class Emacs") or WinActive("ahk_class  X410_XAppWin")
+    Send "^{@}"
+else
 {
 if is_target()
     Send "{CtrlDown}{Space}{CtrlUp}"
@@ -460,6 +463,8 @@ else
         global IS_PRE_SPC := 1
 }
 }
+}
+
 !h::
 {
 if is_target()
@@ -612,13 +617,6 @@ else
     else
         Send(A_ThisHotkey)
 }
-}
-
-;; Set the mark with C-SPC in Emacs
-^Space::
-{
-if WinActive("ahk_class Emacs") or WinActive("ahk_class  X410_XAppWin")
-    Send "^{@}"
 }
 
 ;; Toggle Chinese and English input method in Emacs
