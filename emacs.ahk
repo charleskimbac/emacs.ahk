@@ -578,7 +578,7 @@ else
 }
 }
 ;; For Visual Studio
-;; 转到文档 M-.
+;; Goto Ducument M-.
 !.::
 {
 if is_target()
@@ -586,7 +586,7 @@ if is_target()
 else
     Send "{F12}"
 }
-;; 返回上一个位置 M-,
+;; Back to last location M-,
 !,::
 {
 if is_target()
@@ -594,7 +594,7 @@ if is_target()
 else
     Send "^{-}"
 }
-;; 切换行注释 C-x,C-;
+;; Toggle line comment C-x,C-;
 ^;::
 {
 if is_target()
