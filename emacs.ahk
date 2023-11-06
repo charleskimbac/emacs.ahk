@@ -625,3 +625,9 @@ Shift::
 if WinActive("ahk_class Emacs") or WinActive("ahk_class  X410_XAppWin")
     Send "{f9}"
 }
+
+;; Bind Tab and Shift+Tab to Up and Down in PolyWorks
+#HotIf WinActive("ahk_exe iminspect.exe") or WinActive("ahk_exe polyworks.exe") or WinActive("ahk_exe imedit.exe")
+Tab::Send "{Down}"
++Tab::Send "{Blind}{Up}"
+#HotIf
