@@ -189,4 +189,4 @@ use Shift key for input method switch
 Now this script only works for V2, tested on v2.0.10
 
 ## Usage
-run `AutoHotkey.ahk` or `emacs.ahk` under [AutoHotkey](https://www.autohotkey.com/) v2.0 
+run `emacs.ahk` under [AutoHotkey](https://www.autohotkey.com/) v2.0 
