@@ -190,3 +190,19 @@ Now this script only works for V2, tested on v2.0.10
 
 ## Usage
 run `emacs.ahk` under [AutoHotkey](https://www.autohotkey.com/) v2.0 
+
+## Automatic launch at Windows startup
+
+Use [PowerShell](https://github.com/PowerShell/PowerShell) to create symbolic link
+
+Syntax:
+``` powershell
+New-Item -ItemType SymbolicLink -Path "Link" -Target "Target"
+```
+Example:
+``` powershell
+ cd $Env:USERPROFILE
+ clone https://github.com/Eason0210/emacs.ahk
+ ni -ItemType SymbolicLink "$Env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\emacs.ahk" -Target "$Env:USERPROFILE\emacs.ahk\emacs.ahk"
+```
+
