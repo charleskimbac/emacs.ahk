@@ -14,40 +14,6 @@ global IS_PRE_SPC := 0
 ; turns to be 1 when Ctrl-c is pressed
 global IS_PRE_C := 0
 
-; Applications you want to disable emacs-like keybindings
-; (Please comment out applications you don't use)
-is_target()
-{
-if WinActive("ahk_class ConsoleWindowClass") ; Cygwin
-    return 1
-if WinActive("ahk_exe Code.exe") ;vscode
-    return 1
-if WinActive("ahk_class VMwareUnityHostWndClass") ; Avoid VMwareUnity with AutoHotkey
-    return 1
-if WinActive("ahk_class mintty")
-    return 1
-if WinActive("ahk_class Window Class")
-    return 1
-if WinActive("ahk_class CASCADIA_HOSTING_WINDOW_CLASS") ;Windows 10 terminal
-    return 1
-if WinActive("ahk_class Vim") ; GVI
-    return 1
-if WinActive("ahk_class Emacs") ; NTEmacs
-    return 1
-if WinActive("ahk_class X410_XAppWin")
-    return 1
-if WinActive("ahk_class RAIL_WINDOW")
-    return 1
-return 0
-}
-
-is_smatraPDF()
-{
-if WinActive("ahk_class SUMATRA_PDF_FRAME") ; smatraPDF
-    return 1
-return 0
-}
-
 delete_char()
 {
     Send "{Del}"
@@ -65,6 +31,7 @@ delete_backward_char()
     Send "{BS}"
     global IS_PRE_SPC := 0
 }
+
 kill_line()
 {
     Send "{ShiftDown}{END}{SHIFTUP}"
@@ -72,6 +39,7 @@ kill_line()
     Send "^x"
     global IS_PRE_SPC := 0
 }
+
 open_line()
 {
     Send "{END}{Enter}{Up}"
@@ -83,11 +51,13 @@ open_line_emacs()
     Send "{Home}{Enter}{Up}"
     global IS_PRE_SPC := 0
 }
+
 quit()
 {
     Send "{ESC}"
     global IS_PRE_SPC := 0
 }
+
 newline()
 {
     Send "{Enter}"
@@ -105,6 +75,7 @@ newline_emacs()
     Send "{END}{Enter}"
     global IS_PRE_SPC := 0
 }
+
 indent_for_tab_command()
 {
     Send "{Tab}"
@@ -116,36 +87,43 @@ indent_for_tab_command_invert()
     Send "+{Tab}"
     global IS_PRE_SPC := 0
 }
+
 newline_and_indent()
 {
     Send "{Enter}{Tab}"
     global IS_PRE_SPC := 0
 }
+
 isearch_forward()
 {
     Send "^f"
     global IS_PRE_SPC := 0
 }
+
 isearch_backward()
 {
     Send "^f"
     global IS_PRE_SPC := 0
 }
+
 kill_region()
 {
     Send "^x"
     global IS_PRE_SPC := 0
 }
+
 kill_ring_save()
 {
     Send "^c"
     global IS_PRE_SPC := 0
 }
+
 yank()
 {
     Send "^v"
     global IS_PRE_SPC := 0
 }
+
 undo()
 {
     Send "^z"
@@ -157,16 +135,19 @@ redo()
     Send "^y"
     global IS_PRE_SPC := 0
 }
+
 find_file()
 {
     Send "^o"
     global IS_PRE_X := 0
 }
+
 save_buffer()
 {
     Send "^s"
     global IS_PRE_X := 0
 }
+
 kill_emacs()
 {
     Send "!{F4}"
@@ -181,6 +162,7 @@ move_beginning_of_line()
     else
         Send "{HOME}"
 }
+
 move_end_of_line()
 {
     global
@@ -189,6 +171,7 @@ move_end_of_line()
     else
         Send "{END}"
 }
+
 previous_line()
 {
     global
@@ -197,6 +180,7 @@ previous_line()
     else
         Send "{Up}"
 }
+
 next_line()
 {
     global
@@ -205,6 +189,7 @@ next_line()
     else
         Send "{Down}"
 }
+
 forward_char()
 {
     global
@@ -213,6 +198,7 @@ forward_char()
     else
         Send "{Right}"
 }
+
 backward_char()
 {
     global
@@ -248,6 +234,7 @@ scroll_up()
     else
         Send "{PgUp}"
 }
+
 scroll_down()
 {
     global
@@ -266,274 +253,189 @@ mark_whole_buffer()
 
 ^x::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
     global IS_PRE_X := 1
 }
+
 ^f::
-{
-if is_target()
-    Send(A_ThisHotkey)
-else
 {
     if IS_PRE_X
         find_file()
     else
         forward_char()
 }
-}
+
 !f::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
-    forward_word()
+    if is_target()
+        Send(A_ThisHotkey)
+    else
+        forward_word()
 }
+
 !b::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
     backward_word()
 }
 
 ^c::
-{
-if is_target()
-    Send(A_ThisHotkey)
-else
 {
     if IS_PRE_X
         kill_emacs()
     else
         global IS_PRE_C := 1
 }
-}
+
 ^d::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
-{
-    if is_smatraPDF()
-        Send "^b"
-    else
-        delete_char()
+    delete_char()
 }
-}
+
 !d::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
     delete_word()
 }
+
 ^h::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
     delete_backward_char()
 }
+
 ^k::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
     kill_line()
 }
+
 ^o::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
     open_line_emacs()
 }
+
 ^g::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
     quit()
 }
+
 ^l::
 {
-if (is_target() || is_smatraPDF())
-    Send(A_ThisHotkey)
-else
     newline_emacs()
 }
+
 ^j::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
     newline_and_indent()
 }
+
 ^m::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
     newline()
 }
+
 ^i::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
     indent_for_tab_command_invert()
 }
+
 !i::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
     indent_for_tab_command()
 }
+
 ^s::
-{
-if is_target()
-    Send(A_ThisHotkey)
-else
 {
     if IS_PRE_X
         save_buffer()
     else
         isearch_forward()
 }
-}
+
 ^r::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
     isearch_backward()
 }
+
 ^w::
 {
-if (is_target() || is_smatraPDF())
-    Send(A_ThisHotkey)
-else
     kill_region()
 }
+
 !w::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
     kill_ring_save()
 }
+
 ^y::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
     yank()
 }
+
 ^/::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
     undo()
 }
+
 ^+/::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
     redo()
 }
+
 ;; Set the mark with C-SPC in Emacs
 ^Space::
-{
-if WinActive("ahk_class Emacs") or WinActive("ahk_class  X410_XAppWin")
-    Send "^{@}"
-else
-{
-if is_target()
-    Send "{CtrlDown}{Space}{CtrlUp}"
-else
 {
     if IS_PRE_SPC
         global IS_PRE_SPC := 0
     else
         global IS_PRE_SPC := 1
-}
-}
 }
 
 !h::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
-{
     if IS_PRE_SPC
         global IS_PRE_SPC := 0
     else
         global IS_PRE_SPC := 1
 }
-}
+
 ^a::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
     move_beginning_of_line()
 }
+
 ^e::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
     move_end_of_line()
 }
+
 ^p::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
     previous_line()
 }
+
 ^n::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
     next_line()
 }
+
 ^b::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
     backward_char()
 }
+
 ^v::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
     scroll_down()
 }
+
 !v::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
     scroll_up()
 }
+
 ;;text scale increase
 #=::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
     Send "^{WheelUp}"
 }
+
 ;;text scale decrease
 #-::
 {
@@ -542,6 +444,7 @@ if is_target()
 else
     Send "^{WheelDown}"
 }
+
 ;; maximize and restore window
 #f::
 {
@@ -551,26 +454,17 @@ if  X < -5
 else
     WinMaximize("A")
 }
+
 h::
-{
-if is_target()
-    Send(A_ThisHotkey)
-else
 {
     if IS_PRE_X
     {
         mark_whole_buffer()
         global IS_PRE_X := 0
     }
-    else
-        Send(A_ThisHotkey)
 }
-}
+
 d::
-{
-if is_target()
-    Send(A_ThisHotkey)
-else
 {
     if IS_PRE_C
     {
@@ -578,33 +472,23 @@ else
         next_line()
         global IS_PRE_C := 0
     }
-    else
-        Send(A_ThisHotkey)
 }
-}
+
 ;; For Visual Studio
-;; Goto Ducument M-.
+;; Goto Document M-.
 !.::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
     Send "{F12}"
 }
+
 ;; Back to last location M-,
 !,::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
     Send "^{-}"
 }
+
 ;; Toggle line comment C-x,C-;
 ^;::
-{
-if is_target()
-    Send(A_ThisHotkey)
-else
 {
     if IS_PRE_X
     {
@@ -614,20 +498,4 @@ else
         next_line()
         global IS_PRE_X := 0
     }
-    else
-        Send(A_ThisHotkey)
 }
-}
-
-;; Toggle Chinese and English input method in Emacs
-Shift::
-{
-if WinActive("ahk_class Emacs") or WinActive("ahk_class  X410_XAppWin")
-    Send "^{\}"
-}
-
-;; Bind Tab and Shift+Tab to Up and Down in PolyWorks
-#HotIf WinActive("ahk_exe iminspect.exe") or WinActive("ahk_exe polyworks.exe") or WinActive("ahk_exe imedit.exe")
-Tab::Send "{Down}"
-+Tab::Send "{Blind}{Up}"
-#HotIf
