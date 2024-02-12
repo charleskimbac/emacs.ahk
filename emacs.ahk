@@ -266,9 +266,6 @@ mark_whole_buffer()
 
 !f::
 {
-    if is_target()
-        Send(A_ThisHotkey)
-    else
         forward_word()
 }
 
@@ -439,9 +436,6 @@ mark_whole_buffer()
 ;;text scale decrease
 #-::
 {
-if is_target()
-    Send(A_ThisHotkey)
-else
     Send "^{WheelDown}"
 }
 
