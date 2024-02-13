@@ -1,5 +1,5 @@
 # emacs.ahk
-This tiny script allows you to use the emacs-like key bindings on Windows, which is written in AutoHotkey (AHK) language.
+This tiny script allows you to use the emacs-like key bindings on Windows, which is written in AutoHotkey (AHK) language.  
 Removed bindings: Copy/Paste, Scroll up/down
 
 ## Supported keybindings
