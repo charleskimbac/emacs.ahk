@@ -456,6 +456,8 @@ h::
         mark_whole_buffer()
         global IS_PRE_X := 0
     }
+    else
+        Send(A_ThisHotkey)
 }
 
 d::
@@ -466,6 +468,8 @@ d::
         next_line()
         global IS_PRE_C := 0
     }
+    else
+        Send(A_ThisHotkey)
 }
 
 ;; For Visual Studio
@@ -492,4 +496,6 @@ d::
         next_line()
         global IS_PRE_X := 0
     }
+    else
+        Send(A_ThisHotkey)
 }
