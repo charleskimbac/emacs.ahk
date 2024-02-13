@@ -11,8 +11,6 @@ SetKeyDelay 0
 global IS_PRE_X := 0
 ; turns to be 1 when ctrl-space is pressed
 global IS_PRE_SPC := 0
-; turns to be 1 when Ctrl-c is pressed
-global IS_PRE_C := 0
 
 delete_char()
 {
@@ -148,12 +146,6 @@ save_buffer()
     global IS_PRE_X := 0
 }
 
-kill_emacs()
-{
-    Send "!{F4}"
-    global IS_PRE_X := 0
-}
-
 move_beginning_of_line()
 {
     global
@@ -226,24 +218,6 @@ backward_word()
         Send "^{Left}"
 }
 
-scroll_up()
-{
-    global
-    if IS_PRE_SPC
-        Send "+{PgUp}"
-    else
-        Send "{PgUp}"
-}
-
-scroll_down()
-{
-    global
-    if IS_PRE_SPC
-        Send "+{PgDn}"
-    else
-        Send "{PgDn}"
-}
-
 mark_whole_buffer()
 {
     Send "^{End}^+{Home}"
@@ -272,14 +246,6 @@ mark_whole_buffer()
 !b::
 {
     backward_word()
-}
-
-^c::
-{
-    if IS_PRE_X
-        kill_emacs()
-    else
-        global IS_PRE_C := 1
 }
 
 ^d::
@@ -417,16 +383,6 @@ mark_whole_buffer()
     backward_char()
 }
 
-^v::
-{
-    scroll_down()
-}
-
-!v::
-{
-    scroll_up()
-}
-
 ;;text scale increase
 #=::
 {
@@ -455,18 +411,6 @@ h::
     {
         mark_whole_buffer()
         global IS_PRE_X := 0
-    }
-    else
-        Send(A_ThisHotkey)
-}
-
-d::
-{
-    if IS_PRE_C
-    {
-        duplicate_line()
-        next_line()
-        global IS_PRE_C := 0
     }
     else
         Send(A_ThisHotkey)
