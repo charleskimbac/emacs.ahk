@@ -1,5 +1,6 @@
 # emacs.ahk
-This tiny script allows you to use the emacs-like key bindings on Windows, which is written in AutoHotkey (AHK) language. The maintainer has used this script since 2020-06 and has verified that it works effectively for various kinds of applications.
+This tiny script allows you to use the emacs-like key bindings on Windows, which is written in AutoHotkey (AHK) language.
+Removed bindings: Copy/Paste, Scroll up/down
 
 ## Supported keybindings
 <table>
@@ -140,14 +141,6 @@ This tiny script allows you to use the emacs-like key bindings on Windows, which
 <td>backward-word</td>
 </tr>
 <tr>
-<td>C-v</td>
-<td>scroll-down</td>
-</tr>
-<tr>
-<td>M-v</td>
-<td>scroll-up</td>
-</tr>
-<tr>
 <td>win-=</td>
 <td>text-scale-increase</td>
 </tr>
@@ -172,9 +165,6 @@ This tiny script allows you to use the emacs-like key bindings on Windows, which
 <td>mark-whole-buffer</td>
 </tr>
 <tr>
-<td>C-c, d</td>
-<td>duplicate of current line</td>
-</tr>
 <tr>
 <td>C-x, C-;</td>
 <td>toggle the comment of line</td>
