@@ -1,6 +1,41 @@
 ;;
 ;; An autohotkey script that provides emacs-like keybinding on Windows
 ;;
+#Requires AutoHotKey v2.0
+
+; show image while script is *not* suspended
+#Include ImagePut.ahk
+
+OnMessage(0x111, OnSuspend)
+OnSuspend(wParam, *) {
+    if (wParam = 65305 || wParam = 65404)
+        return (Suspend(), ToggleSuspend(wParam), 0)
+}
+
+; show image on first run
+global image := ImageShow("emacsLogo.png",, [1850, 30], 0x90000000, 0x80088 | 0x20)
+; image location = (1850, 30)
+
+ToggleSuspend(Mode := -1)
+{
+	global image
+    if (Mode >= -1 && Mode <= 1)
+        Suspend(Mode)
+    
+    Sleep(20)
+
+    if (not A_IsSuspended and not image)
+    {
+        image := ImageShow("emacsLogo.png",, [1850, 30], 0x90000000, 0x80088 | 0x20)
+    }
+    else if (A_IsSuspended and image)
+    {
+        ImageDestroy({window: image})
+        image := 0
+    }
+}
+
+
 InstallKeybdHook
 #UseHook
 
