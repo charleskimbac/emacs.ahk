@@ -1,6 +1,7 @@
 # emacs.ahk
 This tiny script allows you to use the emacs-like key bindings on Windows, which is written in AutoHotkey (AHK) language.  
-Removed bindings: Copy/Paste, Scroll up/down
+Removed: Window-specific keybind suspension, binds depending on C-c (duplicate of current line), Copy/Paste (M-w/C-y), Scroll up/down (M-v, C-v),	kill-emacs (C-x C-c)
+Added: Image notification at top right of screen when emacs keybinds are active (when script is not suspended)
 
 ## Supported keybindings
 <table>
@@ -23,14 +24,6 @@ Removed bindings: Copy/Paste, Scroll up/down
 <tr>
 <td>C-x C-s</td>
 <td>save-buffer</td>
-</tr>
-<tr>
-<td>C-x C-c</td>
-<td>kill-emacs</td>
-</tr>
-<tr>
-<td>F5</td>
-<td>kill-emacs</td>
 </tr>
 <tr>
 <td>C-d</td>
@@ -91,14 +84,6 @@ Removed bindings: Copy/Paste, Scroll up/down
 <tr>
 <td>C-w</td>
 <td>kill-region</td>
-</tr>
-<tr>
-<td>M-w</td>
-<td>kill-ring-save</td>
-</tr>
-<tr>
-<td>C-y</td>
-<td>yank</td>
 </tr>
 <tr>
 <td>C-/</td>
@@ -172,8 +157,10 @@ Removed bindings: Copy/Paste, Scroll up/down
 </table>
 
 * Customized by Eason Huang
+* Modifications by Charles Kim
+  
 ## Toggle Input Method by Shift Key
-use Shift key for input method switch
+Use Shift key for input method switch
 
 ## Update to AutoHotkey V2
 Now this script only works for V2, tested on v2.0.10
@@ -183,16 +170,6 @@ run `emacs.ahk` under [AutoHotkey](https://www.autohotkey.com/) v2.0
 
 ## Automatic launch at Windows startup
 
-Use [PowerShell](https://github.com/PowerShell/PowerShell) to create symbolic link
+* Win + R -> "shell:startup" -> place a shortcut to the script here  
 
-Syntax:
-``` powershell
-New-Item -ItemType SymbolicLink -Path "Link" -Target "Target"
-```
-Example:
-``` powershell
- cd $Env:USERPROFILE
- clone https://github.com/Eason0210/emacs.ahk
- ni -ItemType SymbolicLink "$Env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\emacs.ahk" -Target "$Env:USERPROFILE\emacs.ahk\emacs.ahk"
-```
-
+* "C:\Users\USERNAME\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup" -> place a shortcut to the script here
