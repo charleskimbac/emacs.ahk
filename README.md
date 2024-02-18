@@ -1,7 +1,9 @@
 # emacs.ahk
 This tiny script allows you to use the emacs-like key bindings on Windows, which is written in AutoHotkey (AHK) language.  
-Removed: Window-specific keybind suspension, binds depending on C-c (duplicate of current line), Copy/Paste (M-w/C-y), Scroll up/down (M-v, C-v),	kill-emacs (C-x C-c)
-Added: Image notification at top right of screen when emacs keybinds are active (when script is not suspended)
+
+Removed: Window-specific keybind suspension, binds depending on C-c (duplicate of current line), Copy/Paste (M-w/C-y),  
+Scroll up/down (M-v, C-v),	kill-emacs (C-x C-c)  
+Added: Image notification at top right of screen when emacs keybinds are active (when script is not suspended)  
 
 ## Supported keybindings
 <table>
