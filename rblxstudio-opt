@@ -1,0 +1,36 @@
+;; add this to emacs.ahk, as needed
+;; if Roblox Studio active, make LCtrl do nothing (so ^n and ^p work for code completion suggestions)
+#HotIf WinActive("ahk_exe RobloxStudioBeta.exe")
+LCtrl::return
+#HotIf WinActive("ahk_exe RobloxStudioBeta.exe") && GetKeyState("Ctrl", "P")
+{
+	n::next_line()
+	p::previous_line()
+	b::backward_char()
+	e::move_end_of_line()
+	a::move_beginning_of_line()
+	r::isearch_backward()
+	s::
+	{
+		if IS_PRE_X
+			save_buffer()
+		else
+			isearch_forward()
+	}
+	o::open_line_emacs()
+	k::kill_line()
+	d::delete_char()
+	f::
+	{
+		if IS_PRE_X
+			find_file()
+		else
+			forward_char()
+	}
+	x::
+	{
+		global IS_PRE_X := 1
+	}
+	z::undo()
+	y::redo()
+}
