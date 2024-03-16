@@ -3,6 +3,7 @@
 ;;
 #Requires AutoHotKey v2.0
 
+
 ; show image while script is *not* suspended
 #Include ImagePut.ahk
 
@@ -15,7 +16,6 @@ OnSuspend(wParam, *) {
 ; show image on first run
 global image := ImageShow("emacsLogo.png",, [1850, 30], 0x90000000, 0x80088 | 0x20)
 ; image location = (1850, 30)
-
 ToggleSuspend(Mode := -1)
 {
 	global image
@@ -36,6 +36,7 @@ ToggleSuspend(Mode := -1)
 }
 
 
+
 InstallKeybdHook
 #UseHook
 
@@ -44,25 +45,25 @@ SetKeyDelay 0
 
 ; turns to be 1 when ctrl-x is pressed
 global IS_PRE_X := 0
-; turns to be 1 when ctrl-space is pressed
-global IS_PRE_SPC := 0
+
+undo()
+{
+    Send "^z"
+}
+
+redo()
+{
+    Send "^y"
+}
 
 delete_char()
 {
     Send "{Del}"
-    global IS_PRE_SPC := 0
 }
 
 delete_word()
 {
     Send "^{Del}"
-    global IS_PRE_SPC := 0
-}
-
-delete_backward_char()
-{
-    Send "{BS}"
-    global IS_PRE_SPC := 0
 }
 
 kill_line()
@@ -70,103 +71,21 @@ kill_line()
     Send "{ShiftDown}{END}{SHIFTUP}"
     Sleep 50 ;[ms] this value depends on your environment
     Send "^x"
-    global IS_PRE_SPC := 0
-}
-
-open_line()
-{
-    Send "{END}{Enter}{Up}"
-    global IS_PRE_SPC := 0
 }
 
 open_line_emacs()
 {
     Send "{Home}{Enter}{Up}"
-    global IS_PRE_SPC := 0
-}
-
-quit()
-{
-    Send "{ESC}"
-    global IS_PRE_SPC := 0
-}
-
-newline()
-{
-    Send "{Enter}"
-    global IS_PRE_SPC := 0
-}
-
-duplicate_line()
-{
-    Send "^d"
-    global IS_PRE_SPC := 0
-}
-
-newline_emacs()
-{
-    Send "{END}{Enter}"
-    global IS_PRE_SPC := 0
-}
-
-indent_for_tab_command()
-{
-    Send "{Tab}"
-    global IS_PRE_SPC := 0
-}
-
-indent_for_tab_command_invert()
-{
-    Send "+{Tab}"
-    global IS_PRE_SPC := 0
-}
-
-newline_and_indent()
-{
-    Send "{Enter}{Tab}"
-    global IS_PRE_SPC := 0
 }
 
 isearch_forward()
 {
     Send "^f"
-    global IS_PRE_SPC := 0
 }
 
 isearch_backward()
 {
     Send "^f"
-    global IS_PRE_SPC := 0
-}
-
-kill_region()
-{
-    Send "^x"
-    global IS_PRE_SPC := 0
-}
-
-kill_ring_save()
-{
-    Send "^c"
-    global IS_PRE_SPC := 0
-}
-
-yank()
-{
-    Send "^v"
-    global IS_PRE_SPC := 0
-}
-
-undo()
-{
-    Send "^z"
-    global IS_PRE_SPC := 0
-}
-
-redo()
-{
-    Send "^y"
-    global IS_PRE_SPC := 0
 }
 
 find_file()
@@ -183,82 +102,43 @@ save_buffer()
 
 move_beginning_of_line()
 {
-    global
-    if IS_PRE_SPC
-        Send "+{HOME}"
-    else
-        Send "{HOME}"
+	Send "{HOME}"
 }
 
 move_end_of_line()
 {
-    global
-    if IS_PRE_SPC
-        Send "+{END}"
-    else
-        Send "{END}"
+    Send "{END}"
 }
 
 previous_line()
 {
-    global
-    if IS_PRE_SPC
-        Send "+{Up}"
-    else
-        Send "{Up}"
+    Send "{Up}"
 }
 
 next_line()
 {
-    global
-    if IS_PRE_SPC
-        Send "+{Down}"
-    else
-        Send "{Down}"
+    Send "{Down}"
 }
 
 forward_char()
 {
-    global
-    if IS_PRE_SPC
-        Send "+{Right}"
-    else
-        Send "{Right}"
+    Send "{Right}"
 }
 
 backward_char()
 {
-    global
-    if IS_PRE_SPC
-        Send "+{Left}"
-    else
-        Send "{Left}"
+    Send "{Left}"
 }
 
 forward_word()
 {
-    global
-    if IS_PRE_SPC
-        Send "^+{Right}"
-    else
-        Send "^{Right}"
+    Send "^{Right}"
 }
 
 backward_word()
 {
-    global
-    if IS_PRE_SPC
-        Send "^+{Left}"
-    else
-        Send "^{Left}"
+    Send "^{Left}"
 }
-
-mark_whole_buffer()
-{
-    Send "^{End}^+{Home}"
-    global IS_PRE_SPC := 0
-}
-
 
 ^x::
 {
@@ -273,70 +153,17 @@ mark_whole_buffer()
         forward_char()
 }
 
-!f::
-{
-        forward_word()
-}
+!f::forward_word()
 
-!b::
-{
-    backward_word()
-}
+!b::backward_word()
 
-^d::
-{
-    delete_char()
-}
+^d::delete_char()
 
-!d::
-{
-    delete_word()
-}
+!d::delete_word()
 
-^h::
-{
-    delete_backward_char()
-}
+^k::kill_line()
 
-^k::
-{
-    kill_line()
-}
-
-^o::
-{
-    open_line_emacs()
-}
-
-^g::
-{
-    quit()
-}
-
-^l::
-{
-    newline_emacs()
-}
-
-^j::
-{
-    newline_and_indent()
-}
-
-^m::
-{
-    newline()
-}
-
-^i::
-{
-    indent_for_tab_command_invert()
-}
-
-!i::
-{
-    indent_for_tab_command()
-}
+^o::open_line_emacs()
 
 ^s::
 {
@@ -346,135 +173,14 @@ mark_whole_buffer()
         isearch_forward()
 }
 
-^r::
-{
-    isearch_backward()
-}
+^r::isearch_backward()
 
-^w::
-{
-    kill_region()
-}
+^a::move_beginning_of_line()
 
-!w::
-{
-    kill_ring_save()
-}
+^e::move_end_of_line()
 
-^y::
-{
-    yank()
-}
+^p::previous_line()
 
-^/::
-{
-    undo()
-}
+^n::next_line()
 
-^+/::
-{
-    redo()
-}
-
-;; Set the mark with C-SPC in Emacs
-^Space::
-{
-    if IS_PRE_SPC
-        global IS_PRE_SPC := 0
-    else
-        global IS_PRE_SPC := 1
-}
-
-!h::
-{
-    if IS_PRE_SPC
-        global IS_PRE_SPC := 0
-    else
-        global IS_PRE_SPC := 1
-}
-
-^a::
-{
-    move_beginning_of_line()
-}
-
-^e::
-{
-    move_end_of_line()
-}
-
-^p::
-{
-    previous_line()
-}
-
-^n::
-{
-    next_line()
-}
-
-^b::
-{
-    backward_char()
-}
-
-;;text scale increase
-#=::
-{
-    Send "^{WheelUp}"
-}
-
-;;text scale decrease
-#-::
-{
-    Send "^{WheelDown}"
-}
-
-;; maximize and restore window
-#f::
-{
-WinGetPos &X, &Y,,, "A"
-if  X < -5
-    WinRestore("A")
-else
-    WinMaximize("A")
-}
-
-h::
-{
-    if IS_PRE_X
-    {
-        mark_whole_buffer()
-        global IS_PRE_X := 0
-    }
-    else
-        Send(A_ThisHotkey)
-}
-
-;; For Visual Studio
-;; Goto Document M-.
-!.::
-{
-    Send "{F12}"
-}
-
-;; Back to last location M-,
-!,::
-{
-    Send "^{-}"
-}
-
-;; Toggle line comment C-x,C-;
-^;::
-{
-    if IS_PRE_X
-    {
-        Send "^{k}"
-        Sleep 50
-        Send "^{/}"
-        next_line()
-        global IS_PRE_X := 0
-    }
-    else
-        Send(A_ThisHotkey)
-}
+^b::backward_char()
