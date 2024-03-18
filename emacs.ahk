@@ -8,7 +8,8 @@
 #Include ImagePut.ahk
 
 OnMessage(0x111, OnSuspend)
-OnSuspend(wParam, *) {
+OnSuspend(wParam, *)
+{
     if (wParam = 65305 || wParam = 65404)
         return (Suspend(), ToggleSuspend(wParam), 0)
 }
@@ -132,7 +133,7 @@ backward_word()
 
 newline_emacs()
 {
-    Send "{END}{Enter}"
+	Send "{END}{Enter}"
 }
 
 select_all()
