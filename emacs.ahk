@@ -46,16 +46,6 @@ SetKeyDelay 0
 ; turns to be 1 when ctrl-x is pressed
 global IS_PRE_X := 0
 
-undo()
-{
-    Send "^z"
-}
-
-redo()
-{
-    Send "^y"
-}
-
 delete_char()
 {
     Send "{Del}"
@@ -140,6 +130,16 @@ backward_word()
     Send "^{Left}"
 }
 
+newline_emacs()
+{
+    Send "{END}{Enter}"
+}
+
+select_all()
+{
+	Send "^a"
+}
+
 ^x::
 {
     global IS_PRE_X := 1
@@ -151,6 +151,14 @@ backward_word()
         find_file()
     else
         forward_char()
+}
+
+^s::
+{
+    if IS_PRE_X
+        save_buffer()
+    else
+        isearch_forward()
 }
 
 !f::forward_word()
@@ -165,13 +173,7 @@ backward_word()
 
 ^o::open_line_emacs()
 
-^s::
-{
-    if IS_PRE_X
-        save_buffer()
-    else
-        isearch_forward()
-}
+^l::newline_emacs()
 
 ^r::isearch_backward()
 
@@ -184,3 +186,5 @@ backward_word()
 ^n::next_line()
 
 ^b::backward_char()
+
+^+a::select_all()
