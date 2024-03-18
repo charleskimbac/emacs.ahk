@@ -73,6 +73,10 @@ A small translucent emacs logo appears at the top right of your screen while ema
 <td>M-b</td>
 <td>backward-word</td>
 </tr>
+<tr>
+<td>C-S-a</td>
+<td>select-all</td>
+</tr>
 </table>
 
 * Customized by Eason Huang
