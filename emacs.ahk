@@ -1,15 +1,13 @@
-;;
 ;; An autohotkey script that provides emacs-like keybinding on Windows
-;;
+
 #Requires AutoHotKey v2.0
 
 
-; show image while script is *not* suspended
+;; show image while script is *not* suspended
 #Include ImagePut.ahk
 
 OnMessage(0x111, OnSuspend)
-OnSuspend(wParam, *)
-{
+OnSuspend(wParam, *) {
     if (wParam = 65305 || wParam = 65404)
         return (Suspend(), ToggleSuspend(wParam), 0)
 }
@@ -37,7 +35,7 @@ ToggleSuspend(Mode := -1)
 }
 
 
-
+;; binds
 InstallKeybdHook
 #UseHook
 
@@ -133,7 +131,7 @@ backward_word()
 
 newline_emacs()
 {
-	Send "{END}{Enter}"
+    Send "{END}{Enter}"
 }
 
 select_all()
@@ -189,3 +187,5 @@ select_all()
 ^b::backward_char()
 
 ^+a::select_all()
+
+NumpadEnter::Send "{Enter}" ; for roblox studio, so the key works in play mode (for fast resetting)
