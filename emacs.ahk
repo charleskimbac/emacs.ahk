@@ -139,6 +139,11 @@ select_all()
 	Send "^a"
 }
 
+undo()
+{
+	Send "^z"
+}
+
 ^x::
 {
     global IS_PRE_X := 1
@@ -188,4 +193,6 @@ select_all()
 
 ^+a::select_all()
 
-NumpadEnter::Send "{Enter}" ; for roblox studio, so the key works in play mode (for fast resetting)
+^+z::undo()
+
+NumpadEnter::Send "{Enter}"
