@@ -139,10 +139,12 @@ select_all()
 	Send "^a"
 }
 
-undo()
+redo()
 {
-	Send "^z"
+	Send "^y"
 }
+
+
 
 ^x::
 {
@@ -193,6 +195,6 @@ undo()
 
 ^+a::select_all()
 
-^+z::undo()
+^+z::redo()
 
-NumpadEnter::Send "{Enter}"
+NumpadEnter::Send "{Enter}" 
