@@ -77,6 +77,10 @@ A small translucent emacs logo appears at the top right of your screen while ema
 <td>C-S-a</td>
 <td>select-all</td>
 </tr>
+<tr>
+<td>C-S-z</td>
+<td>redo</td>
+</tr>
 </table>
 
 * Customized by Eason Huang
