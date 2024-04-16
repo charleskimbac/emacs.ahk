@@ -62,6 +62,13 @@ kill_line()
     Send "^x"
 }
 
+delete_line()
+{
+	Send "{ShiftDown}{END}{SHIFTUP}"
+	Sleep 50 ;[ms] this value depends on your environment
+	Send "{Del}"
+}
+
 open_line_emacs()
 {
     Send "{Home}{Enter}{Up}"
@@ -197,4 +204,4 @@ redo()
 
 ^+z::redo()
 
-NumpadEnter::Send "{Enter}" 
+^+k::delete_line()
