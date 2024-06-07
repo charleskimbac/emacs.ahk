@@ -2,6 +2,25 @@
 
 #Requires AutoHotKey v2.0
 
+/* UNCOMMENT IF YOU WANT TO AUTOSUSPEND THE SCRIPT BASED ON WHAT WINDOW IS ACTIVE
+;; suspend if certain windows are active, EDIT BELOW
+DllCall("RegisterShellHookWindow", "Ptr", A_ScriptHwnd)
+OnMessage(DllCall("RegisterWindowMessage", "Str", "SHELLHOOK"), SuspendIfActive)
+
+SuspendIfActive(event, hwnd, *) {
+    if event != 32772 ; HSHELL_RUDEAPPACTIVATED
+        return
+
+    ; if Notepad is active
+    if WinActive("ahk_exe EXAMPLE1.exe") or WinActive("ahk_exe EXAMPLE2.exe") { ; ADD EXEs AS NEEDED! USE WINDOWS SPY APPLICATION (included in AHK)
+        ;Suspend true
+		ToggleSuspend(1)
+	} else {
+        ;Suspend false
+		ToggleSuspend(0)
+    }
+}
+*/
 
 ;; show image while script is *not* suspended
 #Include ImagePut.ahk
@@ -151,8 +170,6 @@ redo()
 	Send "^y"
 }
 
-
-
 ^x::
 {
     global IS_PRE_X := 1
@@ -205,3 +222,5 @@ redo()
 ^+z::redo()
 
 ^+k::delete_line()
+
+NumpadEnter::Send "{Enter}"
