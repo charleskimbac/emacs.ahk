@@ -1,8 +1,9 @@
 # emacs.ahk
-This script allows you to use some emacs-like key bindings on Windows, which is written in the AutoHotkey (AHK) language.
+This script allows you to use some emacs-like key bindings on Windows, which is written in the AutoHotkey (AHK) language.  
 
-A small translucent emacs logo appears at the top right of your screen while emacs keybinds are active (i.e. while the script is *not* suspended).
-
+Additional features:
+- A small translucent emacs logo appears at the top right of your screen while emacs keybinds are active (i.e. while the script is *not* suspended).  
+- Auto-suspend keybinds based on current active window (must uncomment and edit code in emacs.ahk)
 
 ## Supported keybindings
 <table>
