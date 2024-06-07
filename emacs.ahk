@@ -11,7 +11,7 @@ SuspendIfActive(event, hwnd, *) {
     if event != 32772 ; HSHELL_RUDEAPPACTIVATED
         return
 
-    ; if Notepad is active
+    ; if window is active
     if WinActive("ahk_exe EXAMPLE1.exe") or WinActive("ahk_exe EXAMPLE2.exe") { ; ADD EXEs AS NEEDED! USE WINDOWS SPY APPLICATION (included in AHK)
         ;Suspend true
 		ToggleSuspend(1)
