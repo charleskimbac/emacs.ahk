@@ -3,7 +3,7 @@ This script allows you to use some emacs-like key bindings on Windows, which is 
 
 Additional features:
 - A small translucent emacs logo appears at the top right of your screen while emacs keybinds are active (i.e. while the script is *not* suspended).
-- Auto-suspend keybinds based on current active window (must uncomment and edit code in emacs.ahk).
+- Auto-suspend keybinds depending on current active window (must uncomment and edit code in emacs.ahk).
 
 ## Supported keybindings
 <table>
@@ -37,10 +37,6 @@ Additional features:
 <tr>
 <td>C-s</td>
 <td>isearch-forward</td>
-</tr>
-<tr>
-<td>C-r</td>
-<td>isearch-backward</td>
 </tr>
 <tr>
 <td>C-a</td>
@@ -92,7 +88,7 @@ Additional features:
 * Modifications by Charles Kim
 
 ## Usage
-run `emacs.ahk` under [AutoHotkey](https://www.autohotkey.com/) v2.0 
+Run `emacs.ahk` under [AutoHotkey](https://www.autohotkey.com/) v2.0 
 
 ## Automatic launch at Windows startup
 
