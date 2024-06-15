@@ -2,8 +2,7 @@
 
 #Requires AutoHotKey v2.0
 
-/* UNCOMMENT IF YOU WANT TO AUTOSUSPEND THE SCRIPT BASED ON WHAT WINDOW IS ACTIVE
-;; suspend if certain windows are active, EDIT BELOW
+;; suspend if certain windows are active, edit below
 DllCall("RegisterShellHookWindow", "Ptr", A_ScriptHwnd)
 OnMessage(DllCall("RegisterWindowMessage", "Str", "SHELLHOOK"), SuspendIfActive)
 
@@ -11,8 +10,8 @@ SuspendIfActive(event, hwnd, *) {
     if event != 32772 ; HSHELL_RUDEAPPACTIVATED
         return
 
-    ; if window is active
-    if WinActive("ahk_exe EXAMPLE1.exe") or WinActive("ahk_exe EXAMPLE2.exe") { ; ADD EXEs AS NEEDED! USE WINDOWS SPY APPLICATION (included in AHK)
+    ; if Notepad is active
+    if WinActive("ahk_exe RobloxPlayerBeta.exe") or WinActive("ahk_exe League of Legends.exe") { ; ADD EXEs AS NEEDED!
         ;Suspend true
 		ToggleSuspend(1)
 	} else {
@@ -20,7 +19,7 @@ SuspendIfActive(event, hwnd, *) {
 		ToggleSuspend(0)
     }
 }
-*/
+
 
 ;; show image while script is *not* suspended
 #Include ImagePut.ahk
@@ -94,11 +93,6 @@ open_line_emacs()
 }
 
 isearch_forward()
-{
-    Send "^f"
-}
-
-isearch_backward()
 {
     Send "^f"
 }
@@ -204,8 +198,6 @@ redo()
 ^o::open_line_emacs()
 
 ^l::newline_emacs()
-
-^r::isearch_backward()
 
 ^a::move_beginning_of_line()
 
