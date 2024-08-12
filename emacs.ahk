@@ -1,4 +1,4 @@
-;; An autohotkey script that provides emacs-like keybinding on Windows
+;; An autohotkey script that provides emacs-like keybindings on Windows
 
 #Requires AutoHotKey v2.0
 
@@ -10,10 +10,14 @@ SuspendIfActive(event, hwnd, *) {
     if event != 32772 ; HSHELL_RUDEAPPACTIVATED
         return
 
-    ; if Notepad is active
-    if WinActive("ahk_exe RobloxPlayerBeta.exe") or WinActive("ahk_exe League of Legends.exe") { ; ADD EXEs AS NEEDED!
-        ;Suspend true
-		ToggleSuspend(1)
+    ; >>> ADD/REMOVE EXEs BELOW AS NEEDED! <<<
+    if WinActive("ahk_exe RobloxPlayerBeta.exe") or 
+        WinActive("ahk_exe League of Legends.exe") or 
+        WinActive("ahk_exe VALORANT-Win64-Shipping.exe") or 
+        WinActive("ahk_exe Overwatch.exe") or 
+        WinActive("ahk_exe destiny2.exe") {
+            ;Suspend true
+            ToggleSuspend(1)
 	} else {
         ;Suspend false
 		ToggleSuspend(0)
@@ -56,8 +60,6 @@ ToggleSuspend(Mode := -1)
 ;; binds
 InstallKeybdHook
 #UseHook
-
-; The following line is a contribution of NTEmacs wiki http://www49.atwiki.jp/ntemacs/pages/20.html
 SetKeyDelay 0
 
 ; turns to be 1 when ctrl-x is pressed
@@ -164,6 +166,7 @@ redo()
 	Send "^y"
 }
 
+
 ^x::
 {
     global IS_PRE_X := 1
@@ -216,3 +219,5 @@ redo()
 ^+k::delete_line()
 
 NumpadEnter::Send "{Enter}"
+
+$F1::return
