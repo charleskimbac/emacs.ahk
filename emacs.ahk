@@ -1,61 +1,76 @@
 ;; An autohotkey script that provides emacs-like keybindings on Windows
-
+;; https://github.com/charleskimbac/emacs.ahk
 #Requires AutoHotKey v2.0
 
-;; suspend if certain windows are active, edit below
-DllCall("RegisterShellHookWindow", "Ptr", A_ScriptHwnd)
-OnMessage(DllCall("RegisterWindowMessage", "Str", "SHELLHOOK"), SuspendIfActive)
+; SETTINGS | 0 = off, 1 = on | remember to reload the script after modifying
+global USING_ACTIVE_ICON := 0 ; show icon when keybinds are active
+global USING_EXE_AUTO_SUSPEND := 1 ; if on, add .exe's below
 
-SuspendIfActive(event, hwnd, *) {
-    if event != 32772 ; HSHELL_RUDEAPPACTIVATED
-        return
+; ===========================================================================
 
-    ; >>> ADD/REMOVE EXEs BELOW AS NEEDED! <<<
-    if WinActive("ahk_exe RobloxPlayerBeta.exe") or 
-        WinActive("ahk_exe League of Legends.exe") or 
-        WinActive("ahk_exe VALORANT-Win64-Shipping.exe") or 
-        WinActive("ahk_exe Overwatch.exe") or 
-        WinActive("ahk_exe destiny2.exe") {
-            ;Suspend true
-            ToggleSuspend(1)
-	} else {
-        ;Suspend false
-		ToggleSuspend(0)
-    }
+;; suspend if certain windows are active, add .exe's below
+if (USING_EXE_AUTO_SUSPEND) {
+	DllCall("RegisterShellHookWindow", "Ptr", A_ScriptHwnd)
+	OnMessage(DllCall("RegisterWindowMessage", "Str", "SHELLHOOK"), SuspendIfActive)
+
+	SuspendIfActive(event, hwnd, *) {
+		if event != 32772 ; HSHELL_RUDEAPPACTIVATED
+			return
+
+		; ADD/REMOVE EXEs BELOW AS NEEDED! <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+		if WinActive("ahk_exe RobloxPlayerBeta.exe") or 
+			WinActive("ahk_exe League of Legends.exe") or 
+			WinActive("ahk_exe VALORANT-Win64-Shipping.exe") or 
+			WinActive("ahk_exe Overwatch.exe") or 
+			WinActive("ahk_exe destiny2.exe") {
+				; then Suspend=true
+				if (USING_ACTIVE_ICON) {
+					ToggleSuspend(1)
+				} else {
+					Suspend(1)
+				}
+		} else { ; then Suspend=false
+			if (USING_ACTIVE_ICON) {
+				ToggleSuspend(0)
+			} else {
+				Suspend(0)
+			}
+		}
+	}
 }
 
+if (USING_ACTIVE_ICON) {
+	;; show image while script is *not* suspended
+	#Include ImagePut.ahk
 
-;; show image while script is *not* suspended
-#Include ImagePut.ahk
+	OnMessage(0x111, OnSuspend)
+	OnSuspend(wParam, *) {
+		if (wParam = 65305 || wParam = 65404)
+			return (Suspend(), ToggleSuspend(wParam), 0)
+	}
 
-OnMessage(0x111, OnSuspend)
-OnSuspend(wParam, *) {
-    if (wParam = 65305 || wParam = 65404)
-        return (Suspend(), ToggleSuspend(wParam), 0)
+	; show image on first run
+	global image := ImageShow("emacsLogo.png",, [1850, 30], 0x90000000, 0x80088 | 0x20)
+	; image location = (1850, 30)
+	ToggleSuspend(Mode := -1)
+	{
+		global image
+		if (Mode >= -1 && Mode <= 1)
+			Suspend(Mode)
+		
+		Sleep(20)
+
+		if (not A_IsSuspended and not image)
+		{
+			image := ImageShow("emacsLogo.png",, [1850, 30], 0x90000000, 0x80088 | 0x20)
+		}
+		else if (A_IsSuspended and image)
+		{
+			ImageDestroy({window: image})
+			image := 0
+		}
+	}
 }
-
-; show image on first run
-global image := ImageShow("emacsLogo.png",, [1850, 30], 0x90000000, 0x80088 | 0x20)
-; image location = (1850, 30)
-ToggleSuspend(Mode := -1)
-{
-	global image
-    if (Mode >= -1 && Mode <= 1)
-        Suspend(Mode)
-    
-    Sleep(20)
-
-    if (not A_IsSuspended and not image)
-    {
-        image := ImageShow("emacsLogo.png",, [1850, 30], 0x90000000, 0x80088 | 0x20)
-    }
-    else if (A_IsSuspended and image)
-    {
-        ImageDestroy({window: image})
-        image := 0
-    }
-}
-
 
 ;; binds
 InstallKeybdHook
@@ -64,11 +79,6 @@ SetKeyDelay 0
 
 ; turns to be 1 when ctrl-x is pressed
 global IS_PRE_X := 0
-
-delete_char()
-{
-    Send "{Del}"
-}
 
 delete_word()
 {
@@ -192,8 +202,6 @@ redo()
 
 !b::backward_word()
 
-^d::delete_char()
-
 !d::delete_word()
 
 ^k::kill_line()
@@ -221,3 +229,14 @@ redo()
 NumpadEnter::Send "{Enter}"
 
 $F1::return
+
+!0::Send "👍"
+!Numpad0::Send "👍"
+
+!p::Send "^p"
+
+Ins::return
+
+SetNumLockState "AlwaysOn"
+
+!k::Send "^k"

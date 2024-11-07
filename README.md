@@ -1,17 +1,21 @@
 # emacs.ahk
-This script allows you to use some emacs-like keybindings on Windows, which is written in the AutoHotkey (AHK) language.    
+This script allows you to use some emacs-like keybindings on Windows, which is written in the AutoHotkey (AHK) language.
 
-Additional features:
-- A small translucent emacs logo appears at the top right of your screen while the keybinds are active (i.e. while the script is *not* suspended).
-- Auto-suspend keybindings depending on the current active window (add your own `.exe`'s in `emacs.ahk`). Remove the relevant code near the top if you want to manually disable/enable the keybindings instead.
-- Disables the F1 key
+## Additional features
+- A small translucent emacs logo appears at the top right of your screen while the keybinds are active (i.e. while the script is *not* suspended)*
+- Auto-suspend keybindings depending on the current active window (add your own `.exe`'s)*
+- Disables the `F1` key
+- Disables the `Insert` key
+- Permanently enables `Num Lock`
+  
+*Enable/disable this feature at the top of `emacs.exe`
 
 ## Keybindings
 C = Ctrl, S = Shift, M = Alt  
 <table>
   <tr>
     <th>Keybinding</th>
-    <th>Emacs Lisp Function</th>
+    <th>Function</th>
   </tr>
   <tr>
     <td>C-x C-f</td>
@@ -85,13 +89,26 @@ C = Ctrl, S = Shift, M = Alt
     <td>C-S-k</td>
     <td>delete-line</td>
   </tr>
+  <tr>
+    <td>M-0</td>
+    <td>👍</td>
+  </tr>
+  <tr>
+    <td>M-p</td>
+    <td>ctrl-p</td>
+  </tr>
+  <tr>
+    <td>M-k</td>
+    <td>ctrl-k</td>
+  </tr>
+  
 </table>
 
 ## Usage
 Run `emacs.ahk` with [AutoHotkey v2.0](https://www.autohotkey.com/).  
-Suspend the script to temporarily disable the keybindings. 
+Suspend the script to temporarily disable the keybindings.
 
 ## Running at Windows startup
-* WinKey + R → Enter "shell:startup" → Place a shortcut to the script here  
+* WinKey + R → Enter "shell:startup" → Place a shortcut to the script here
 
-* "C:\Users\USERNAME\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup" (change USERNAME) → Place a shortcut to the script here
+* "C:\Users\\%USERNAME%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup" → Place a shortcut to the script here
