@@ -86,10 +86,6 @@ C = Ctrl, S = Shift, M = Alt
     <td>redo</td>
   </tr>
   <tr>
-    <td>C-S-k</td>
-    <td>delete-line</td>
-  </tr>
-  <tr>
     <td>M-0</td>
     <td>👍</td>
   </tr>
