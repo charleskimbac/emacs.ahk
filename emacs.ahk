@@ -3,7 +3,7 @@
 #Requires AutoHotKey v2.0
 
 ; SETTINGS | 0 = off, 1 = on | remember to reload the script after modifying
-global USING_ACTIVE_ICON := 0 ; show icon when keybinds are active
+global USING_ACTIVE_ICON := 0 ; show icon while keybinds are active
 global USING_EXE_AUTO_SUSPEND := 1 ; if on, add .exe's below
 
 ; ===========================================================================
@@ -22,7 +22,8 @@ if (USING_EXE_AUTO_SUSPEND) {
 			WinActive("ahk_exe League of Legends.exe") or 
 			WinActive("ahk_exe VALORANT-Win64-Shipping.exe") or 
 			WinActive("ahk_exe Overwatch.exe") or 
-			WinActive("ahk_exe destiny2.exe") {
+			WinActive("ahk_exe destiny2.exe")
+			{
 				; then Suspend=true
 				if (USING_ACTIVE_ICON) {
 					ToggleSuspend(1)
@@ -224,8 +225,6 @@ redo()
 
 ^+z::redo()
 
-^+k::delete_line()
-
 NumpadEnter::Send "{Enter}"
 
 $F1::return
@@ -233,10 +232,16 @@ $F1::return
 !0::Send "👍"
 !Numpad0::Send "👍"
 
-!p::Send "^p"
+^+p::Send "^p"
+
+^+k::Send "^k"
+
+^+b::Send "^b"
 
 Ins::return
 
 SetNumLockState "AlwaysOn"
 
-!k::Send "^k"
+
+
+; where: ctrl = ^, alt = !, shift = +

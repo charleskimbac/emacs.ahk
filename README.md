@@ -94,12 +94,16 @@ C = Ctrl, S = Shift, M = Alt
     <td>👍</td>
   </tr>
   <tr>
-    <td>M-p</td>
+    <td>C-S-p</td>
     <td>ctrl-p</td>
   </tr>
   <tr>
-    <td>M-k</td>
+    <td>C-S-k</td>
     <td>ctrl-k</td>
+  </tr>
+  <tr>
+    <td>C-S-b</td>
+    <td>ctrl-b</td>
   </tr>
   
 </table>
