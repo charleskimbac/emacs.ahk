@@ -1,10 +1,15 @@
 ;; An autohotkey script that provides emacs-like keybindings on Windows
 ;; https://github.com/charleskimbac/emacs.ahk
+
 #Requires AutoHotKey v2.0
 
-; SETTINGS | 0 = off, 1 = on | remember to reload the script after modifying
-global USING_ACTIVE_ICON := 0 ; show icon while keybinds are active
-global USING_EXE_AUTO_SUSPEND := 1 ; if on, add .exe's below
+;; SETTINGS | 0 = off, 1 = on | remember to reload the script after modifying
+; show small image at top right of screen while keybinds are active
+global USING_ACTIVE_ICON := 0
+global IMAGE_PATH := "emacsLogo.png"
+
+; auto-suspend keybindings if .exe is currently active, add .exe's below
+global USING_EXE_AUTO_SUSPEND := 1
 
 ; ===========================================================================
 
@@ -17,7 +22,7 @@ if (USING_EXE_AUTO_SUSPEND) {
 		if event != 32772 ; HSHELL_RUDEAPPACTIVATED
 			return
 
-		; ADD/REMOVE EXEs BELOW AS NEEDED! <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+		; ADD/REMOVE EXEs BELOW AS NEEDED! <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 		if WinActive("ahk_exe RobloxPlayerBeta.exe") or 
 			WinActive("ahk_exe League of Legends.exe") or 
 			WinActive("ahk_exe VALORANT-Win64-Shipping.exe") or 
@@ -51,7 +56,7 @@ if (USING_ACTIVE_ICON) {
 	}
 
 	; show image on first run
-	global image := ImageShow("emacsLogo.png",, [1850, 30], 0x90000000, 0x80088 | 0x20)
+	global image := ImageShow(IMAGE_PATH,, [1850, 30], 0x90000000, 0x80088 | 0x20)
 	; image location = (1850, 30)
 	ToggleSuspend(Mode := -1)
 	{
@@ -73,53 +78,21 @@ if (USING_ACTIVE_ICON) {
 	}
 }
 
-;; binds
+;; define key functions
 InstallKeybdHook
 #UseHook
 SetKeyDelay 0
 
-; turns to be 1 when ctrl-x is pressed
-global IS_PRE_X := 0
-
-delete_word()
-{
-    Send "^{Del}"
-}
-
 kill_line()
 {
     Send "{ShiftDown}{END}{SHIFTUP}"
-    Sleep 50 ;[ms] this value depends on your environment
+    Sleep 50
     Send "^x"
 }
 
-delete_line()
-{
-	Send "{ShiftDown}{END}{SHIFTUP}"
-	Sleep 50 ;[ms] this value depends on your environment
-	Send "{Del}"
-}
-
-open_line_emacs()
+newline_above()
 {
     Send "{Home}{Enter}{Up}"
-}
-
-isearch_forward()
-{
-    Send "^f"
-}
-
-find_file()
-{
-    Send "^o"
-    global IS_PRE_X := 0
-}
-
-save_buffer()
-{
-    Send "^s"
-    global IS_PRE_X := 0
 }
 
 move_beginning_of_line()
@@ -162,14 +135,9 @@ backward_word()
     Send "^{Left}"
 }
 
-newline_emacs()
+newline_below()
 {
     Send "{END}{Enter}"
-}
-
-select_all()
-{
-	Send "^a"
 }
 
 redo()
@@ -178,50 +146,30 @@ redo()
 }
 
 
-^x::
-{
-    global IS_PRE_X := 1
-}
+;; BINDS START
+; where: ctrl = ^, alt = !, shift = +
 
-^f::
-{
-    if IS_PRE_X
-        find_file()
-    else
-        forward_char()
-}
+^l::forward_char()
 
-^s::
-{
-    if IS_PRE_X
-        save_buffer()
-    else
-        isearch_forward()
-}
+!l::forward_word()
 
-!f::forward_word()
+^h::backward_char()
 
-!b::backward_word()
+!h::backward_word()
 
-!d::delete_word()
+^k::previous_line()
 
-^k::kill_line()
+^j::next_line()
 
-^o::open_line_emacs()
+^m::kill_line()
 
-^l::newline_emacs()
+^u::newline_above()
 
-^a::move_beginning_of_line()
+^i::newline_below()
+
+^q::move_beginning_of_line()
 
 ^e::move_end_of_line()
-
-^p::previous_line()
-
-^n::next_line()
-
-^b::backward_char()
-
-^+a::select_all()
 
 ^+z::redo()
 
@@ -232,16 +180,8 @@ $F1::return
 !0::Send "👍"
 !Numpad0::Send "👍"
 
-^+p::Send "^p"
-
-^+k::Send "^k"
-
-^+b::Send "^b"
-
 Ins::return
 
 SetNumLockState "AlwaysOn"
 
-
-
-; where: ctrl = ^, alt = !, shift = +
+^x::return ; temp bc i keep pressing it...
